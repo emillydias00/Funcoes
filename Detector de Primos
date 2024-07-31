@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <math.h>
+
+// Função para verificar se um número é primo
+// Retorna 1 se for primo, 0 se não for primo, -1 se for menor que 2
+int eh_primo(int numero) {
+    if (numero < 2) {
+        return -1; // Números menores que 2 não são primos
+    }
+    
+    if (numero == 2) {
+        return 1; // 2 é primo
+    }
+    
+    // Verifica se o número é divisível por algum número além de 1 e ele mesmo
+    int limite = sqrt(numero);
+    for (int i = 2; i <= limite; i++) {
+        if (numero % i == 0) {
+            return 0; // Não é primo, pois é divisível por i
+        }
+    }
+    
+    return 1; // É primo, pois não foi encontrado divisor além de 1 e ele mesmo
+}
+
+int main() 
+    int numero;
+    
+    // Lê os números da entrada até o fim do arquivo
+    while (scanf("%d", &numero) == 1) {
+        int resultado = eh_primo(numero);
+        
+        // Imprime o resultado conforme especificado
+        printf("%d\n", resultado);
+    }
+    
+    return 0;
+}
