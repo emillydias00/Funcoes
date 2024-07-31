@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+// Função para calcular os dias julianos desde 1/1/1 até a data fornecida
+int dias_julianos(int dia, int mes, int ano) {
+    int a, y, m;
+    
+    a = (14 - mes) / 12;
+    y = ano + 4800 - a;
+    m = mes + 12 * a - 3;
+    
+    return dia + ((153 * m + 2) / 5) + 365 * y + (y / 4) - (y / 100) + (y / 400) - 32045;
+}
+
+// Função para calcular os dias transcorridos desde 17/09/2020 até a data fornecida
+int dias_transcorridos(int dia, int mes, int ano) {
+    // Data de referência para calcular os dias transcorridos
+    int dia_ref = 17, mes_ref = 9, ano_ref = 2020;
+    
+    // Calcula os dias julianos para a data de referência e para a data fornecida
+    int dias_ref = dias_julianos(dia_ref, mes_ref, ano_ref);
+    int dias_data = dias_julianos(dia, mes, ano);
+    
+    // Calcula a diferença em dias (incluindo o dia final)
+    return dias_data - dias_ref + 1;
+}
+
+int main() {
+    int dia, mes, ano;
+    
+    // Leitura dos dados de entrada até o fim do arquivo
+    while (scanf("%d %d %d", &dia, &mes, &ano) == 3) {
+        // Calcula os dias transcorridos desde 17/09/2020 até a data fornecida
+        int dias = dias_transcorridos(dia, mes, ano);
+        
+        // Imprime o resultado
+        printf("%d\n", dias);
+    }
+    
+    return 0;
+}
