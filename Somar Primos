@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <math.h>
+
+// Função para verificar se um número é primo
+// Retorna 1 se for primo, 0 se não for primo
+int Primo(int numero) {
+    if (numero < 2) {
+        return 0; // Números menores que 2 não são primos
+    }
+    
+    if (numero == 2) {
+        return 1; // 2 é primo
+    }
+    
+    // Verifica se o número é divisível por algum número além de 1 e ele mesmo
+    int limite = sqrt(numero);
+    for (int i = 2; i <= limite; i++) {
+        if (numero % i == 0) {
+            return 0; // Não é primo, pois é divisível por i
+        }
+    }
+    
+    return 1; // É primo, pois não foi encontrado divisor além de 1 e ele mesmo
+}
+
+// Função para calcular a soma dos N primeiros números primos
+int Soma_Primos(int N) {
+    int contador = 0; // Contador de números primos encontrados
+    int numero = 2;   // Começa verificando a partir do primeiro número primo
+    int soma = 0;     // Inicializa a soma
+    
+    while (contador < N) {
+        if (Primo(numero)) {
+            soma += numero;
+            contador++;
+        }
+        numero++;
+    }
+    
+    return soma;
+}
+
+int main() {
+    int N;
+    
+    // Lê os números da entrada até o fim do arquivo
+    while (scanf("%d", &N) == 1) {
+        // Calcula a soma dos N primeiros números primos
+        int resultado = Soma_Primos(N);
+        
+        // Imprime o resultado conforme especificado
+        printf("%d\n", resultado);
+    }
+    
+    return 0;
+}
